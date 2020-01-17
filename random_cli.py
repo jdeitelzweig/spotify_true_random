@@ -50,8 +50,9 @@ if token:
 			clear = input("Clear playlist (y/n): ")
 			if clear.lower() == "y":
 				new_id = playlist['id']
-				results = sp.user_playlist_remove_all_occurrences_of_tracks(
-				        username, new_id, get_all_tracks(username, new_id))
+				temp = get_all_tracks(username, new_id)
+				for i in range(0, len(temp), 100):
+					results = sp.user_playlist_remove_all_occurrences_of_tracks(username, new_id, temp[i:i+100])
 			else:
 				new = input("Enter new name: ")
 				while new in playlist_names:
